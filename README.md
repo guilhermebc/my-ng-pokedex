@@ -1,5 +1,11 @@
 # MyNgPokedex
 
+Olá, este é um repositório de um SPA em Angular terei acesso a todos os pokemons e visualizar suas características de acordo com as suas necessidades. Também será possível marcar como favorito quantos pokemons quiser. A lista dos seus favoritos serão armazenados no localStorage do seu navegador.
+
+Hello, this is a repository of a SPA in Angular I will have access to all pokemons and visualize their characteristics according to their needs. You can also bookmark as many pokemons as you like. The list of your favorites will be stored in the location of your browser.
+
+##
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
 ## Development server
