@@ -1,43 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
+import { AppService } from './app.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'my-ng-pokedex';
-  private apiURL = 'https://pokeapi.co/api/v2/pokemon/';
-  nextPage;
-  results = [];
+	
+	private nextPage;
+  	private prevPage;
+  	title: string = 'my-ng-pokedex';
+  	results = [];
 
-  constructor(private http: HttpClient){
-	console.log('Requesting...');
-  }
+	constructor(private appService: AppService){
+  	}
 
-  ngOnInit():void {
-	this.getData(this.apiURL);  
-  }
+  	ngOnInit():void {
+		this.getPokemonList();
+	}
 
-  getData(url){
-	this.http.get(url).subscribe(response => {
-		this.pokemonList(response);
-	  }, err => {
-		  console.log('error', err);
-	  });
-  }
+  	setPokemonList(data){
+		this.results = data.results;
+	}
 
-  pokemonList(data){
-	data.results.forEach((obj: any, index: any) => {
-		console.log(obj.name);
-		this.results = obj.name;
-	});
-	this.nextPage = data.next;
-}
+	setNextPage(url){
+		this.nextPage = url.next;
+	}
 
-  getNextPage(url) {
-	  this.getData(url);
-  }
+	setPrevPage(url) {
+		this.prevPage = url.previous;
+	}
 
+	getNextPage() {
+		return this.nextPage;
+	}
+
+	getPrevPage(){
+		return this.prevPage;
+	}
+
+	getPokemonList(){
+
+		const SELF = this;
+
+		this.appService.getPokemons().subscribe(response => {
+			SELF.setPokemonList(response);
+			SELF.setNextPage(response);
+			SELF.setPrevPage(response);
+		},err => console.log('error', err));
+	}
+
+	toNextPage(url){
+
+		const SELF = this;
+
+		this.appService.requestPage(url).subscribe(response => {
+			SELF.setPokemonList(response);
+			SELF.setNextPage(response);
+			SELF.setPrevPage(response);
+		},err => console.log('error', err));
+	}
+	  
 }

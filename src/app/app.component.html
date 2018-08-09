@@ -6,9 +6,13 @@
     </h1>
   </div>
   <div class="wrapper-text">
-    <p>last pokemon of page: {{ results }}</p>
-    <p>next page:  <strong>{{ nextPage }}</strong></p>
+    <ul>
+      <li *ngFor="let result of results">{{result.name}}, {{result.url}}</li>
+    </ul>
+    <p>prev page:  <strong>{{ this.prevPage }}</strong></p>
+    <p>next page:  <strong>{{ this.nextPage }}</strong></p>
   </div>
-  <button (click)="getNextPage(this.nextPage)">next page</button>
+  <button (click)="toNextPage(this.prevPage)">prev page</button>
+  <button (click)="toNextPage(this.nextPage)">next page</button>
 </div>
 
