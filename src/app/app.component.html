@@ -1,18 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <div class="text-center">
-    <h1 class="title">
-      Welcome to {{ title }}!
-    </h1>
-  </div>
-  <div class="wrapper-text">
-    <ul>
-      <li *ngFor="let result of results">{{result.name}}, {{result.url}}</li>
-    </ul>
-    <p>prev page:  <strong>{{ this.prevPage }}</strong></p>
-    <p>next page:  <strong>{{ this.nextPage }}</strong></p>
-  </div>
-  <button (click)="toNextPage(this.prevPage)">prev page</button>
-  <button (click)="toNextPage(this.nextPage)">next page</button>
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="text-center">
+				<h1 class="title">
+				Welcome to {{ title }}!
+				</h1>
+			</div>	
+		</div>
+	</div>
 </div>
-
+<app-pokemon-info></app-pokemon-info>
+	  
+	  

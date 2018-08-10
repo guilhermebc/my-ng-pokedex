@@ -1,0 +1,26 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="w-100 text-center">
+			<button class="btn btn-primary m-3" (click)="toNextPage(this.prevPage)">Voltar</button>
+			<button class="btn btn-primary m-3" (click)="toNextPage(this.nextPage)">Próximo</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-4" *ngFor="let result of results">
+			<div class="card-columns">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">{{result.name}}</h5>
+						<ngb-accordion #acc="ngbAccordion">
+							<ngb-panel title="Simple">
+								<ng-template ngbPanelContent>
+									info 1.
+								</ng-template>
+							</ngb-panel>
+						</ngb-accordion>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
