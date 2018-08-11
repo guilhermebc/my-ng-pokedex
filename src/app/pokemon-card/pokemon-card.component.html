@@ -8,14 +8,14 @@
 </div>
 <div class="wrapper-card-pokemon shadow p-3 mb-5 bg-white rounded">
 	<div class="wrapper-img">
-		<img class="shadow-lg p-3 mb-5 bg-white rounded" [src]="sprite" alt="icon-{{name}}">
+		<img class="shadow-lg p-3 mb-5 bg-white rounded" [src]="pokemon.sprite" alt="icon-{{pokemon.name}}">
 	</div>
 	<hr>
 	<div class="wrapper-text ">
-		<h5><strong>Nome: </strong> {{name}}</h5>
-		<p><strong>Peso: {{weight/10}} kg</strong></p>
-		<p><strong>Altura: {{height/10}} m</strong></p>
-		<p><strong>Experiência base: {{xp}}</strong></p>
+		<h5><strong>Nome: </strong> {{pokemon.name}}</h5>
+		<p><strong>Peso: {{pokemon.weight/10}} kg</strong></p>
+		<p><strong>Altura: {{pokemon.height/10}} m</strong></p>
+		<p><strong>Experiência base: {{pokemon.base_exp}}</strong></p>
 	</div>
 </div>
 <div class="wrapper-buttons">

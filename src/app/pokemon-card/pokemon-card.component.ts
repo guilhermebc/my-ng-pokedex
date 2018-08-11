@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AppService } from '../app.service';
 
-import { PokemonStatusComponent } from '../pokemon-status/pokemon-status.component';
+import { Pokemon } from '../Pokemon';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -14,12 +14,17 @@ export class PokemonCardComponent implements OnInit {
   	private nextPage;
 	private prevPage;
 	selectedPokemon: string = 'Escolha um pokemon';
-	pokemon;
-	name = '--';
-	sprite = '/assets/pokeball.png';
-	weight = 0.0;
-	height = 0.0;
-	xp = 0;
+
+	pokemon: Pokemon = {
+		id: 0,
+		url: '',
+		name: '--',
+		sprite: '/assets/pokeball.png',
+		weight: 0.0,
+		height: 0.0,
+		base_exp: 0
+	}
+	
   	results = [];
 
 	constructor(private appService: AppService){
@@ -79,18 +84,21 @@ export class PokemonCardComponent implements OnInit {
 		});
 	}
 
-	setPokemonStatus(pokemon){
-		this.name = pokemon.name;
-		this.sprite = pokemon.sprites.front_default;
-		this.weight = pokemon.weight;
-		this.height = pokemon.height;
-		this.xp = pokemon.base_experience;
+	setPokemonStatus(status){
+		this.pokemon = {
+			id: status.id,
+			url: status.url,
+			name: status.name,
+			sprite: status.sprites.front_default,
+			weight: status.weight,
+			height: status.height,
+			base_exp: status.base_experience
+		}
 	}
 
 	onChangePokemon(name, url){
-		this.pokemon = url;
 		this.selectedPokemon = name;
-		this.	getPokemonStatus(url);
+		this.getPokemonStatus(url);
 	}
 
 }
