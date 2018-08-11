@@ -1,0 +1,30 @@
+#header {
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.6);
+
+    position: fixed;
+    top:0;
+    left:0;
+
+    margin: 0 auto;
+
+    width: 100%;
+
+    padding: 15px;
+
+    z-index: 99;
+
+    color: #fff;
+
+    h1 {
+        text-transform: uppercase;
+        margin-bottom: 0;
+    }
+
+    @media screen and(max-width: 560px) {
+
+        h1 {
+            font-size: 25px;
+        }
+    }
+}

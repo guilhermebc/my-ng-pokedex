@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+// @import "./reset";
 @import "~bootstrap/scss/bootstrap.scss";
+
+body {
+    padding-top: 100px;
+
+    @media screen and(max-width: 560px) {
+        padding-top: 80px;
+    }
+}

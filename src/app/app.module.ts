@@ -8,13 +8,13 @@ import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
-import { PokemonStatusComponent } from './pokemon-status/pokemon-status.component';
+import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonCardComponent,
-    PokemonStatusComponent
+    PokemonListComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +25,7 @@ import { PokemonStatusComponent } from './pokemon-status/pokemon-status.componen
   exports: [
   ],
   providers: [
-    AppService,
-    PokemonCardComponent,
-    PokemonStatusComponent
+    AppService
   ],
   bootstrap: [AppComponent]
 })
