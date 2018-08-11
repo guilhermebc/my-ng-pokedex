@@ -4,7 +4,7 @@ Olá, este é um repositório de um SPA em Angular terei acesso a todos os pokem
 
 Hello, this is a repository of a SPA in Angular I will have access to all pokemons and visualize their characteristics according to their needs. You can also bookmark as many pokemons as you like. The list of your favorites will be stored in the location of your browser.
 
-##Install Dependencies
+## Install Dependencies
 
 `npm install`
 

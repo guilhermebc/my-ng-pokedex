@@ -1,0 +1,24 @@
+<div class="col-xs-12 px-4 text-center">
+	<div class="d-block p-4" ngbDropdown #myDrop="ngbDropdown">
+		<button class="btn btn-outline-primary" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">{{selectedPokemon}}</button>
+		<div ngbDropdownMenu aria-labelledby="dropdownManual">
+			<button class="dropdown-item" *ngFor="let result of results" (click)="onChangePokemon(result.name, result.url)">{{result.name}}</button>
+		</div>
+	</div>
+</div>
+<div class="wrapper-card-pokemon shadow p-3 mb-5 bg-white rounded">
+	<div class="wrapper-img">
+		<img class="shadow-lg p-3 mb-5 bg-white rounded" [src]="sprite" alt="icon-{{name}}">
+	</div>
+	<hr>
+	<div class="wrapper-text ">
+		<h5><strong>Nome: </strong> {{name}}</h5>
+		<p><strong>Peso: {{weight/10}} kg</strong></p>
+		<p><strong>Altura: {{height/10}} m</strong></p>
+		<p><strong>Experiência base: {{xp}}</strong></p>
+	</div>
+</div>
+<div class="wrapper-buttons">
+	<button class="btn btn-primary float-left" (click)="toNextPage(this.prevPage)">Voltar</button>
+	<button class="btn btn-primary float-right" (click)="toNextPage(this.nextPage)">Próximo</button>
+</div>

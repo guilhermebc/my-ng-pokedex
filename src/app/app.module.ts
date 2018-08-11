@@ -6,12 +6,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
+
+import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
+import { PokemonStatusComponent } from './pokemon-status/pokemon-status.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PokemonInfoComponent
+    PokemonCardComponent,
+    PokemonStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,9 @@ import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
   exports: [
   ],
   providers: [
-    AppService
+    AppService,
+    PokemonCardComponent,
+    PokemonStatusComponent
   ],
   bootstrap: [AppComponent]
 })

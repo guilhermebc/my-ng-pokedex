@@ -9,11 +9,11 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  getPokemons(){
-	return this.http.get(this.apiURL);
+  getAllPokemons(){
+	  return this.http.get(this.apiURL);
   }
 
-  requestPage(url){
-	return this.http.get(url);
+  requestUrl(url){
+	  return this.http.get(url);
   }
 }

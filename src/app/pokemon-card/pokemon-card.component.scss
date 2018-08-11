@@ -1,0 +1,35 @@
+.wrapper-card-pokemon {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+
+    // border: 1px solid gray;
+    border-radius: 8px;
+
+    padding: 15px;
+
+    .wrapper-img {
+        img {
+            width: 50%;
+            margin:auto;
+            display: inline-block;
+            padding: 15px 0;
+        }
+    }
+
+    .wrapper-text {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+.wrapper-buttons {
+    width: 50%;
+    margin: auto;
+}
+
+@media screen and (max-width: 768px){
+    .wrapper-card-pokemon{
+        width: 100%;
+    }
+}
