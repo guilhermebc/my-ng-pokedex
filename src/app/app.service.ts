@@ -43,7 +43,6 @@ export class AppService {
         this.localStorage.setItem('pokemonList', tempArr).subscribe(() => {})
 
       } else {
-        console.log("first time");
         tempArr.push(pokemon);
         SELF.localStorage.setItem('pokemonList', tempArr).subscribe(() => {}); 
       }
@@ -57,4 +56,5 @@ export class AppService {
   clearFavData(){
     this.localStorage.clear().subscribe(() => {});
   }
+  
 }

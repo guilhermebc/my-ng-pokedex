@@ -19,7 +19,10 @@ export class PokemonCardComponent implements OnInit, OnChanges {
 		sprite: '/assets/pokeball.png',
 		weight: 0.0,
 		height: 0.0,
-		base_exp: 0
+		base_exp: 0,
+		types: [],
+		abilities: [],
+		stats: []
 	}
 
 	constructor(private service: AppService){
@@ -29,7 +32,7 @@ export class PokemonCardComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(){
-		console.log("change card component");
+		console.log("card component changes");
 	}
 
 	addFavorite(pokemon) {

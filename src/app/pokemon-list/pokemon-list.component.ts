@@ -27,7 +27,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(){
-		console.log("change list component");
+		console.log("list component changes");
 	}
 
 	getAllFavorites(){
@@ -109,15 +109,34 @@ export class PokemonListComponent implements OnInit, OnChanges {
 		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
 	}
 
-	setPokemonStatus(status, url) {
+	setPokemonStatus(info, url) {
+		let types = [];
+		let abilities = [];
+		let status = [];
+
+		info.types.forEach(element => {
+			types.push(element.type.name);
+		});
+
+		info.abilities.forEach(element => {
+			if(element.is_hidden) abilities.push(element.ability.name);
+		});
+
+		info.stats.forEach(element => {
+			status.push({stat: element.stat.name, num: element.base_stat});
+		});
+
 		this.pokemonUrl = {
-			id: status.id,
+			id: info.id,
 			url: url,
-			name: status.name,
-			sprite: status.sprites.front_default,
-			weight: status.weight,
-			height: status.height,
-			base_exp: status.base_experience
+			name: info.name,
+			sprite: info.sprites.front_default,
+			weight: info.weight,
+			height: info.height,
+			base_exp: info.base_experience,
+			types: types,
+			abilities: abilities,
+			stats: status
 		}
 	}
 }

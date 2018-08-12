@@ -1,15 +1,22 @@
 <div class="wrapper-card-pokemon shadow rounded" *ngIf="this.pokemon != '';">
-	<button (click)="addFavorite(pokemon)">favorite</button>
 	<div class="wrapper-img">
 		<img class="shadow-lg rounded" [src]="pokemon.sprite" alt="icon-{{pokemon.name}}">
 	</div>
 	<hr>
 	<div class="wrapper-text" (click)="sendId()">
-		<small><strong>Id: {{pokemon.id}}</strong></small>
-		<h5><strong>Nome: </strong> {{pokemon.name | uppercase}}</h5>
+		<h5 class="text-center"><strong>{{pokemon.name | uppercase}}</strong></h5>
+		<p><strong>Id: {{pokemon.id}}</strong></p>
 		<p><strong>Peso: {{pokemon.weight/10}} kg</strong></p>
 		<p><strong>Altura: {{pokemon.height/10}} m</strong></p>
 		<p><strong>Experiência base: {{pokemon.base_exp}}</strong></p>
+		<p><strong>Tipo: {{pokemon.types}}</strong></p>
+		<p><strong>Habilidades: {{pokemon.abilities}}</strong></p>
+		<hr>
+		<p class="text-center"><strong>Status</strong></p>
+		<p *ngFor="let item of pokemon.stats"><b>{{item.stat}}:</b> {{item.num}}</p>
+	</div>
+	<div class="w-100 text-right">
+		<button class="btn btn-primary" (click)="addFavorite(pokemon)">Favorite</button>
 	</div>
 </div>
 <hr *ngIf="this.pokemon != '';">

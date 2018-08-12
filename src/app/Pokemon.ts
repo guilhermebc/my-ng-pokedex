@@ -6,7 +6,7 @@ export class Pokemon {
     weight: any;
     height: any;
     base_exp: any;
-    // types = [];
-    // abilities = [];
-    // stats = [];
+    types = [];
+    abilities = [];
+    stats = [];
 }
