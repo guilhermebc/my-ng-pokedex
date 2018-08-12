@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 
 import { AppService } from '../app.service';
 
@@ -8,45 +8,54 @@ import { AppService } from '../app.service';
   styleUrls: ['./pokemon-list.component.scss']
 })
 
-export class PokemonListComponent implements OnInit {
+export class PokemonListComponent implements OnInit, OnChanges {
 
-  	private nextPage;
+	private nextPage;
 	private prevPage;
 	pokemonUrl: any = '';
 	isFavList: boolean = false;
 	infoLabel: string = 'Carregando...';
 	results = [];
-	favorites = []
+	favorites = [];
 
-  	constructor(private appService: AppService) {
-		
-  	}
+	constructor(private appService: AppService) {
+	}
 
-  	ngOnInit() {
+	ngOnInit() {
 		this.getPokemonList();
-		this.appService.readFavData();
+		this.getAllFavorites();
+	}
+
+	ngOnChanges(){
+		console.log("change list component");
+	}
+
+	getAllFavorites(){
+		this.appService.readFavData().subscribe((response) => {
+			if(response != null) {
+				this.favorites = [];
+				this.favorites = response;
+			} else {
+				this.favorites = [];
+			}
+		});
 	}
 
 	setFilter(event: any) {
 
-		this.appService.readFavData();
+		this.getAllFavorites();
 
 		if(event.target.value == 1){
 			this.isFavList = true;
-
-			this.favorites = this.appService.listFilter;
-			
-			this.favorites.length == 0 ? this.infoLabel = 'Favoritos vazio' : '';
-
 		} else {
 			this.infoLabel = 'Carregando todos os pokemons...';
 			this.isFavList = false;
 		}
 
-		console.log(this.favorites)
+		this.favorites.length == 0 ? this.infoLabel = 'Lista favoritos vazia' : '';
 	}
 
-  	setPokemonList(data) {
+	setPokemonList(data) {
 		this.results = data.results;
 	}
 
@@ -64,9 +73,9 @@ export class PokemonListComponent implements OnInit {
 
 	getPrevPage() {
 		return this.prevPage;
-  	}
+	}
   
-  	getPokemonList() {
+	getPokemonList() {
 
 		const SELF = this;
 
@@ -75,7 +84,7 @@ export class PokemonListComponent implements OnInit {
 			SELF.setNextPage(response);
 			SELF.setPrevPage(response);
 		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
-  	}
+	}
   
 	toNextPage(url) {
 

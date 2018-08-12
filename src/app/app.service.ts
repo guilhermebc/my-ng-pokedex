@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorage, JSONSchema } from '@ngx-pwa/local-storage';
 
-import { Favorites } from './Favorites';
-
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
   private apiURL = 'https://pokeapi.co/api/v2/pokemon/';
-  listFilter = [];
 
   constructor(private http: HttpClient, protected localStorage: LocalStorage) { }
 
@@ -54,16 +51,7 @@ export class AppService {
   }
 
   readFavData(){
-    const SELF = this;
-    this.localStorage.getItem('pokemonList').subscribe((response) => {
-      
-      if(response != null) {
-        SELF.listFilter = [];
-        SELF.listFilter = response;
-      } else {
-        SELF.listFilter = [];
-      }
-    });
+    return this.localStorage.getItem('pokemonList');
   }
 
   clearFavData(){

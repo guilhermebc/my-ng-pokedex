@@ -1,4 +1,4 @@
-<app-pokemon-card [pokemonInfo]="this.pokemonUrl"></app-pokemon-card>
+<app-pokemon-card [pokemonInfo]="pokemonUrl"></app-pokemon-card>
 <div class="col-xs-12 col-md-12 text-center mt-3 mb-4">
 	<div class="custom-control custom-radio custom-control-inline" (change)="setFilter($event);">
 		<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="0" checked>
@@ -9,23 +9,23 @@
 		<label class="custom-control-label" for="customRadioInline2">Favoritos</label>
 	</div>
 </div>
-<button (click)="this.appService.clearFavData()">limpar</button>
+<button (click)="appService.clearFavData()">limpar</button>
 <div class="col-xs-12 col-md-6 offset-md-3 px-0">
 	<p *ngIf="results.length == 0" class="text-center pt-3">
 		{{infoLabel}}
 	</p>
-	<div *ngIf="(!this.isFavList)">
+	<div *ngIf="(!isFavList)">
 		<ul class="list-group shadow rounded">
-			<li class="list-group-item" [class.active]="this.pokemonUrl.name == result.name"  *ngFor="let result of results;" (click)="setPokemonUrl(result.url)"><b>{{result.name}}</b></li>
+			<li class="list-group-item" [class.active]="pokemonUrl.name == result.name"  *ngFor="let result of results;" (click)="setPokemonUrl(result.url)"><b>{{result.name}}</b></li>
 		</ul>
 		<div class="wrapper-buttons text-center">
-			<button class="btn btn-primary mx-1" *ngIf="this.prevPage != null" (click)="toNextPage(this.prevPage)">Voltar</button>
-			<button class="btn btn-primary mx-1" (click)="toNextPage(this.nextPage)">Próxima página</button>
+			<button class="btn btn-primary mx-1" *ngIf="prevPage != null" (click)="toNextPage(prevPage)">Voltar</button>
+			<button class="btn btn-primary mx-1" (click)="toNextPage(nextPage)">Próxima página</button>
 		</div>
 	</div>
-	<div *ngIf="(this.isFavList)">
+	<div *ngIf="(isFavList)">
 		<ul class="list-group shadow rounded">
-			<li class="list-group-item" [class.active]="this.pokemonUrl.name == favorite.name"  *ngFor="let favorite of favorites;" (click)="setPokemonUrl(favorite.url)"><b>{{favorite.name}}</b></li>
+			<li class="list-group-item" [class.active]="pokemonUrl.name == favorite.name" *ngFor="let favorite of favorites;" (click)="setPokemonUrl(favorite.url)"><b>{{favorite.name}}</b></li>
 		</ul>			
 	</div>
 	<hr>

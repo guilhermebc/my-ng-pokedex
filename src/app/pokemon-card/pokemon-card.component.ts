@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { Pokemon } from '../Pokemon';
-import { Favorites } from '../Favorites';
 import { AppService } from '../app.service';
 
 @Component({
@@ -12,7 +11,6 @@ import { AppService } from '../app.service';
 export class PokemonCardComponent implements OnInit, OnChanges {
 
 	selectedPokemon: string = 'Escolha um pokemon';
-	pokemonList: Favorites[] = [];
 
 	@Input('pokemonInfo') pokemon: Pokemon = {
 		id: 0,
@@ -31,10 +29,10 @@ export class PokemonCardComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(){
-		this.service.readFavData();
+		console.log("change card component");
 	}
 
-	writeFavorite(){
-		this.service.writeFavData(this.pokemon);
+	addFavorite(pokemon) {
+		this.service.writeFavData(pokemon);
 	}
 }

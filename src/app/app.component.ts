@@ -10,7 +10,6 @@ export class AppComponent implements OnInit {
 	title: string = 'my-ng-pokedex';
 
 	constructor(){
-		
 	}
 
 	ngOnInit(){
