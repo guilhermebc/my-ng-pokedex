@@ -1,28 +1,24 @@
+<app-pokemon-card [pokemonInfo]="this.pokemonUrl"></app-pokemon-card>
 <div class="col-xs-12 col-md-12 text-center mt-3 mb-4">
-	<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
-		<label ngbButtonLabel class="btn-primary">
-			<input ngbButton type="radio" [value]="all"> Todos
-		</label>
-		<label ngbButtonLabel class="btn-primary">
-			<input ngbButton type="radio" value="fav"> Favoritos
-		</label>
+	<div class="custom-control custom-radio custom-control-inline" (change)="setFilter($event)">
+		<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="1" checked>
+		<label class="custom-control-label" for="customRadioInline1">Todos</label>
+	</div>
+	<div class="custom-control custom-radio custom-control-inline" (change)="setFilter($event)">
+		<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="0">
+		<label class="custom-control-label" for="customRadioInline2">Favoritos</label>
 	</div>
 </div>
-<div class="col-xs-12 col-md-6 offset-md-3">
+<div class="col-xs-12 col-md-6 offset-md-3 px-0">
 	<p *ngIf="results.length == 0" class="text-center pt-3">
 		Carregando...
 	</p>
-    <ul class="list-group shadow rounded">
-		<li class="list-group-item" *ngFor="let result of results" (click)="setPokemonUrl(result.url)">{{result.name}}</li>
-    </ul>			
-    <div class="wrapper-buttons text-center">
+	<ul class="list-group shadow rounded">
+		<li class="list-group-item" [class.active]="this.pokemonUrl.name == result.name"  *ngFor="let result of results;" (click)="setPokemonUrl(result.url)"><b>{{result.name}}</b></li>
+	</ul>			
+	<div class="wrapper-buttons text-center">
 		<button class="btn btn-primary mx-1" *ngIf="this.prevPage != null" (click)="toNextPage(this.prevPage)">Voltar</button>
-		<button class="btn btn-primary mx-1" (click)="toNextPage(this.nextPage)">Próximo</button>
+		<button class="btn btn-primary mx-1" (click)="toNextPage(this.nextPage)">Próxima página</button>
 	</div>
 	<hr>
-</div>
-<div class="row">
-	<div class="col-xs-12 col-md-12">
-		<app-pokemon-card [pokemonInfo]="this.pokemonUrl"></app-pokemon-card>
-	</div>
 </div>

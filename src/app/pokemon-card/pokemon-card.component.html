@@ -1,12 +1,14 @@
-<div class="wrapper-card-pokemon shadow p-3 mb-5 bg-white rounded" *ngIf="this.pokemon != '';">
+<div class="wrapper-card-pokemon shadow rounded" *ngIf="this.pokemon != '';">
 	<div class="wrapper-img">
-		<img class="shadow-lg p-3 mb-5 bg-white rounded" [src]="pokemon.sprite" alt="icon-{{pokemon.name}}">
+		<img class="shadow-lg rounded" [src]="pokemon.sprite" alt="icon-{{pokemon.name}}">
 	</div>
 	<hr>
-	<div class="wrapper-text ">
-		<h5><strong>Nome: </strong> {{pokemon.name}}</h5>
+	<div class="wrapper-text" (click)="sendId()">
+		<small><strong>Id: {{pokemon.id}}</strong></small>
+		<h5><strong>Nome: </strong> {{pokemon.name | uppercase}}</h5>
 		<p><strong>Peso: {{pokemon.weight/10}} kg</strong></p>
 		<p><strong>Altura: {{pokemon.height/10}} m</strong></p>
 		<p><strong>Experiência base: {{pokemon.base_exp}}</strong></p>
 	</div>
 </div>
+<hr *ngIf="this.pokemon != '';">

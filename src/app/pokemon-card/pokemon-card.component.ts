@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Pokemon } from '../Pokemon';
 
@@ -21,10 +21,16 @@ export class PokemonCardComponent implements OnInit {
 		base_exp: 0
 	}
 
+	@Output('pokemonId') id = new EventEmitter();
+
 	constructor(){
 	}
 
   	ngOnInit():void {
+	}
+
+	sendId(){
+		this.id.emit(this.pokemon.id);
 	}
 
 }

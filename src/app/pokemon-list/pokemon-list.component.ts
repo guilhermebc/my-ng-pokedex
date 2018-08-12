@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { AppService } from '../app.service';
 
@@ -7,24 +7,31 @@ import { AppService } from '../app.service';
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.scss']
 })
+
 export class PokemonListComponent implements OnInit {
 
-  private nextPage;
+  	private nextPage;
 	private prevPage;
 	pokemonUrl: any = '';
-  results = [];
+	results = [];
 
-  constructor(private appService: AppService) { }
+  	constructor(private appService: AppService) {
+		
+  	}
 
-  ngOnInit() {
-    this.getPokemonList();
-  }
+  	ngOnInit() {
+		this.getPokemonList();
+	}
 
-  setPokemonList(data){
+	setFilter(event: any) {
+		console.log(event.target.value);
+	}
+
+  	setPokemonList(data) {
 		this.results = data.results;
 	}
 
-	setNextPage(url){
+	setNextPage(url) {
 		this.nextPage = url.next;
 	}
 
@@ -36,11 +43,11 @@ export class PokemonListComponent implements OnInit {
 		return this.nextPage;
 	}
 
-	getPrevPage(){
+	getPrevPage() {
 		return this.prevPage;
-  }
+  	}
   
-  getPokemonList(){
+  	getPokemonList() {
 
 		const SELF = this;
 
@@ -49,13 +56,14 @@ export class PokemonListComponent implements OnInit {
 			SELF.setNextPage(response);
 			SELF.setPrevPage(response);
 		},err => console.log('error', err));
-  }
+  	}
   
-	toNextPage(url){
+	toNextPage(url) {
 
 		const SELF = this;
 
 		this.results = [];
+		this.pokemonUrl = '';
 
 		this.appService.requestUrl(url).subscribe(response => {
 			SELF.setPokemonList(response);
@@ -64,15 +72,16 @@ export class PokemonListComponent implements OnInit {
 		},err => console.log('error', err));
 	}
 
-	setPokemonUrl(url){
+	setPokemonUrl(url) {
 		const SELF = this;
 
 		this.appService.requestUrl(url).subscribe(response => {
 			SELF.setPokemonStatus(response);
+			window.scrollTo(0, 0)
 		},err => console.log('error', err));
 	}
 
-	setPokemonStatus(status){
+	setPokemonStatus(status) {
 		this.pokemonUrl = {
 			id: status.id,
 			url: status.url,
