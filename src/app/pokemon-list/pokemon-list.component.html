@@ -1,17 +1,18 @@
 <app-pokemon-card [pokemonInfo]="this.pokemonUrl"></app-pokemon-card>
 <div class="col-xs-12 col-md-12 text-center mt-3 mb-4">
-	<div class="custom-control custom-radio custom-control-inline" (change)="setFilter($event)">
-		<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="1" checked>
+	<div class="custom-control custom-radio custom-control-inline" (change)="setFilter($event);">
+		<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="0" checked>
 		<label class="custom-control-label" for="customRadioInline1">Todos</label>
 	</div>
 	<div class="custom-control custom-radio custom-control-inline" (change)="setFilter($event)">
-		<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="0">
+		<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="1">
 		<label class="custom-control-label" for="customRadioInline2">Favoritos</label>
 	</div>
 </div>
+<button (click)="this.appService.clearFavData()">limpar</button>
 <div class="col-xs-12 col-md-6 offset-md-3 px-0">
 	<p *ngIf="results.length == 0" class="text-center pt-3">
-		Carregando...
+		{{infoLabel}}
 	</p>
 	<ul class="list-group shadow rounded">
 		<li class="list-group-item" [class.active]="this.pokemonUrl.name == result.name"  *ngFor="let result of results;" (click)="setPokemonUrl(result.url)"><b>{{result.name}}</b></li>

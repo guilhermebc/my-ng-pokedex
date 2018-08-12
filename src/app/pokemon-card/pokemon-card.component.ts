@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Pokemon } from '../Pokemon';
+import { Favorites } from '../Favorites';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -10,6 +12,7 @@ import { Pokemon } from '../Pokemon';
 export class PokemonCardComponent implements OnInit {
 
 	selectedPokemon: string = 'Escolha um pokemon';
+	pokemonList: Favorites[] = [];
 
 	@Input('pokemonInfo') pokemon: Pokemon = {
 		id: 0,
@@ -21,16 +24,13 @@ export class PokemonCardComponent implements OnInit {
 		base_exp: 0
 	}
 
-	@Output('pokemonId') id = new EventEmitter();
-
-	constructor(){
+	constructor(private service: AppService){
 	}
 
   	ngOnInit():void {
 	}
 
-	sendId(){
-		this.id.emit(this.pokemon.id);
+	writeFavorite(){
+		this.service.writeFavData(this.pokemon);
 	}
-
 }

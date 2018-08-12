@@ -1,4 +1,5 @@
 <div class="wrapper-card-pokemon shadow rounded" *ngIf="this.pokemon != '';">
+	<button (click)="writeFavorite()">favorite</button>
 	<div class="wrapper-img">
 		<img class="shadow-lg rounded" [src]="pokemon.sprite" alt="icon-{{pokemon.name}}">
 	</div>

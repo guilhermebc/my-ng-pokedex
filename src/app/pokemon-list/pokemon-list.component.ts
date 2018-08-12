@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AppService } from '../app.service';
 
@@ -13,7 +13,9 @@ export class PokemonListComponent implements OnInit {
   	private nextPage;
 	private prevPage;
 	pokemonUrl: any = '';
+	infoLabel: string = 'Carregando...';
 	results = [];
+	favorites = []
 
   	constructor(private appService: AppService) {
 		
@@ -21,10 +23,23 @@ export class PokemonListComponent implements OnInit {
 
   	ngOnInit() {
 		this.getPokemonList();
+		this.appService.readFavData();
 	}
 
 	setFilter(event: any) {
-		console.log(event.target.value);
+		this.results = [];
+
+		if(event.target.value == 1){
+			this.favorites = this.appService.listFilter;
+			if(this.favorites.length > 0) {
+				this.results = this.favorites;
+			} else {
+				this.infoLabel = 'Favoritos vazio';
+			}
+		} else {
+			this.infoLabel = 'Carregando todos os pokemons...';
+			this.getPokemonList();
+		}
 	}
 
   	setPokemonList(data) {
@@ -55,7 +70,7 @@ export class PokemonListComponent implements OnInit {
 			SELF.setPokemonList(response);
 			SELF.setNextPage(response);
 			SELF.setPrevPage(response);
-		},err => console.log('error', err));
+		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
   	}
   
 	toNextPage(url) {
@@ -69,22 +84,22 @@ export class PokemonListComponent implements OnInit {
 			SELF.setPokemonList(response);
 			SELF.setNextPage(response);
 			SELF.setPrevPage(response);
-		},err => console.log('error', err));
+		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
 	}
 
 	setPokemonUrl(url) {
 		const SELF = this;
 
 		this.appService.requestUrl(url).subscribe(response => {
-			SELF.setPokemonStatus(response);
+			SELF.setPokemonStatus(response, url);
 			window.scrollTo(0, 0)
-		},err => console.log('error', err));
+		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
 	}
 
-	setPokemonStatus(status) {
+	setPokemonStatus(status, url) {
 		this.pokemonUrl = {
 			id: status.id,
-			url: status.url,
+			url: url,
 			name: status.name,
 			sprite: status.sprites.front_default,
 			weight: status.weight,
