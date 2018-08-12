@@ -13,6 +13,7 @@ export class PokemonListComponent implements OnInit {
   	private nextPage;
 	private prevPage;
 	pokemonUrl: any = '';
+	isFavList: boolean = false;
 	infoLabel: string = 'Carregando...';
 	results = [];
 	favorites = []
@@ -27,19 +28,22 @@ export class PokemonListComponent implements OnInit {
 	}
 
 	setFilter(event: any) {
-		this.results = [];
+
+		this.appService.readFavData();
 
 		if(event.target.value == 1){
+			this.isFavList = true;
+
 			this.favorites = this.appService.listFilter;
-			if(this.favorites.length > 0) {
-				this.results = this.favorites;
-			} else {
-				this.infoLabel = 'Favoritos vazio';
-			}
+			
+			this.favorites.length == 0 ? this.infoLabel = 'Favoritos vazio' : '';
+
 		} else {
 			this.infoLabel = 'Carregando todos os pokemons...';
-			this.getPokemonList();
+			this.isFavList = false;
 		}
+
+		console.log(this.favorites)
 	}
 
   	setPokemonList(data) {

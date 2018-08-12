@@ -14,12 +14,19 @@
 	<p *ngIf="results.length == 0" class="text-center pt-3">
 		{{infoLabel}}
 	</p>
-	<ul class="list-group shadow rounded">
-		<li class="list-group-item" [class.active]="this.pokemonUrl.name == result.name"  *ngFor="let result of results;" (click)="setPokemonUrl(result.url)"><b>{{result.name}}</b></li>
-	</ul>			
-	<div class="wrapper-buttons text-center">
-		<button class="btn btn-primary mx-1" *ngIf="this.prevPage != null" (click)="toNextPage(this.prevPage)">Voltar</button>
-		<button class="btn btn-primary mx-1" (click)="toNextPage(this.nextPage)">Próxima página</button>
+	<div *ngIf="(!this.isFavList)">
+		<ul class="list-group shadow rounded">
+			<li class="list-group-item" [class.active]="this.pokemonUrl.name == result.name"  *ngFor="let result of results;" (click)="setPokemonUrl(result.url)"><b>{{result.name}}</b></li>
+		</ul>
+		<div class="wrapper-buttons text-center">
+			<button class="btn btn-primary mx-1" *ngIf="this.prevPage != null" (click)="toNextPage(this.prevPage)">Voltar</button>
+			<button class="btn btn-primary mx-1" (click)="toNextPage(this.nextPage)">Próxima página</button>
+		</div>
+	</div>
+	<div *ngIf="(this.isFavList)">
+		<ul class="list-group shadow rounded">
+			<li class="list-group-item" [class.active]="this.pokemonUrl.name == favorite.name"  *ngFor="let favorite of favorites;" (click)="setPokemonUrl(favorite.url)"><b>{{favorite.name}}</b></li>
+		</ul>			
 	</div>
 	<hr>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { Pokemon } from '../Pokemon';
 import { Favorites } from '../Favorites';
@@ -9,7 +9,7 @@ import { AppService } from '../app.service';
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.scss'],
 })
-export class PokemonCardComponent implements OnInit {
+export class PokemonCardComponent implements OnInit, OnChanges {
 
 	selectedPokemon: string = 'Escolha um pokemon';
 	pokemonList: Favorites[] = [];
@@ -28,6 +28,10 @@ export class PokemonCardComponent implements OnInit {
 	}
 
   	ngOnInit():void {
+	}
+
+	ngOnChanges(){
+		this.service.readFavData();
 	}
 
 	writeFavorite(){
