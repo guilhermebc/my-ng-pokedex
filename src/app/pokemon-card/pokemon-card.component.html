@@ -5,18 +5,18 @@
 	<hr>
 	<div class="wrapper-text" (click)="sendId()">
 		<h5 class="text-center"><strong>{{pokemon.name | uppercase}}</strong></h5>
-		<p><strong>Id: {{pokemon.id}}</strong></p>
-		<p><strong>Peso: {{pokemon.weight/10}} kg</strong></p>
-		<p><strong>Altura: {{pokemon.height/10}} m</strong></p>
-		<p><strong>Experiência base: {{pokemon.base_exp}}</strong></p>
-		<p><strong>Tipo: {{pokemon.types}}</strong></p>
-		<p><strong>Habilidades: {{pokemon.abilities}}</strong></p>
+		<p><strong>Id: </strong>{{pokemon.id}}</p>
+		<p><strong>Weight: </strong>{{pokemon.weight/10}} kg</p>
+		<p><strong>Height: </strong>{{pokemon.height/10}} m</p>
+		<p><strong>Base experience: </strong>{{pokemon.base_exp}}</p>
+		<p><strong>Type: </strong>{{pokemon.types}}</p>
+		<p><strong>Abilitie(s): </strong>{{pokemon.abilities}}</p>
 		<hr>
 		<p class="text-center"><strong>Status</strong></p>
-		<p *ngFor="let item of pokemon.stats"><b>{{item.stat}}:</b> {{item.num}}</p>
+		<p *ngFor="let item of pokemon.stats"><b>{{item.stat | titlecase }}:</b> {{item.num}}</p>
 	</div>
 	<div class="w-100 text-right">
-		<button class="btn btn-primary" (click)="addFavorite(pokemon)">Favorite</button>
+		<button class="btn btn-primary" (click)="addFavorite(pokemon)">Add Favorite</button>
 	</div>
 </div>
 <hr *ngIf="this.pokemon != '';">

@@ -14,7 +14,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
 	private prevPage;
 	pokemonUrl: any = '';
 	isFavList: boolean = false;
-	infoLabel: string = 'Carregando...';
+	infoLabel: string = 'Loading...';
 	results = [];
 	favorites = [];
 
@@ -27,7 +27,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(){
-		console.log("list component changes");
+		// console.log("list component changes");
 	}
 
 	getAllFavorites(){
@@ -48,11 +48,8 @@ export class PokemonListComponent implements OnInit, OnChanges {
 		if(event.target.value == 1){
 			this.isFavList = true;
 		} else {
-			this.infoLabel = 'Carregando todos os pokemons...';
 			this.isFavList = false;
 		}
-
-		this.favorites.length == 0 ? this.infoLabel = 'Lista favoritos vazia' : '';
 	}
 
 	setPokemonList(data) {
@@ -65,6 +62,10 @@ export class PokemonListComponent implements OnInit, OnChanges {
 
 	setPrevPage(url) {
 		this.prevPage = url.previous;
+	}
+
+	setLabelInfo(text) {
+		this.infoLabel = text;
 	}
 
 	getNextPage() {
@@ -83,7 +84,8 @@ export class PokemonListComponent implements OnInit, OnChanges {
 			SELF.setPokemonList(response);
 			SELF.setNextPage(response);
 			SELF.setPrevPage(response);
-		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
+			SELF.setLabelInfo('');
+		},err => this.setLabelInfo('An unexpected error occurred, please try again, or check back later.'));
 	}
   
 	toNextPage(url) {
@@ -97,16 +99,17 @@ export class PokemonListComponent implements OnInit, OnChanges {
 			SELF.setPokemonList(response);
 			SELF.setNextPage(response);
 			SELF.setPrevPage(response);
-		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
+		},err => this.setLabelInfo('An unexpected error occurred, please try again, or check back later.'));
 	}
 
 	setPokemonUrl(url) {
 		const SELF = this;
-
+		SELF.infoLabel = 'Loading pokemon...';
 		this.appService.requestUrl(url).subscribe(response => {
 			SELF.setPokemonStatus(response, url);
-			window.scrollTo(0, 0)
-		},err => this.infoLabel = 'Ocorreu um erro inesperado, tente novamente ou volte mais tarde.');
+			window.scrollTo(0, 0);
+			SELF.infoLabel = '';
+		},err => this.setLabelInfo('An unexpected error occurred, please try again, or check back later.'));
 	}
 
 	setPokemonStatus(info, url) {

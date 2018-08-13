@@ -32,7 +32,7 @@ export class PokemonCardComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(){
-		console.log("card component changes");
+		// console.log("card component changes");
 	}
 
 	addFavorite(pokemon) {
